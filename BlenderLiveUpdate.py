@@ -13,9 +13,9 @@ event = threading.Event()
         
 def doit(handler):
     print("handler work")
-	temp_name = next(tempfile._get_candidate_names())
-	default_tmp_dir = tempfile._get_default_tempdir()
-	tmp_file = default_tmp_dir + "\\" + temp_name + ".gltf"
+    temp_name = next(tempfile._get_candidate_names())
+    default_tmp_dir = tempfile._get_default_tempdir()
+    tmp_file = default_tmp_dir + "\\" + temp_name + ".gltf"
 
     try:
         bpy.ops.export_scene.gltf(filepath=tmp_file,export_format='GLTF_EMBEDDED')
@@ -35,11 +35,11 @@ class S(BaseHTTPRequestHandler):
     def do_GET(self):
         logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         execution_queue.put({"fn":doit,"handler":self})
-		print("waiting")
-		event.wait()
-		event.clear()
+        print("waiting")
+        event.wait()
+        event.clear()
         print("ready")
-		
+        
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
