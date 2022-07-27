@@ -7,6 +7,7 @@ from pathlib import Path
 import queue
 import threading
 import tempfile
+import os
 
 execution_queue = queue.Queue()
 event = threading.Event()
@@ -15,7 +16,7 @@ def doit(handler):
     print("handler work")
     temp_name = next(tempfile._get_candidate_names())
     default_tmp_dir = tempfile._get_default_tempdir()
-    tmp_file = default_tmp_dir + "\\" + temp_name + ".gltf"
+    tmp_file = os.path.join(default_tmp_dir, temp_name + ".gltf")
 
     try:
         bpy.ops.export_scene.gltf(filepath=tmp_file,export_format='GLTF_EMBEDDED')
