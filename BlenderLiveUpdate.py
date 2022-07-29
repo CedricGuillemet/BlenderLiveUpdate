@@ -19,7 +19,7 @@ def doit(handler):
     tmp_file = os.path.join(default_tmp_dir, temp_name + ".gltf")
 
     try:
-        bpy.ops.export_scene.gltf(filepath=tmp_file,export_format='GLTF_EMBEDDED')
+        bpy.ops.export_scene.gltf(filepath=tmp_file,export_format='GLTF_EMBEDDED',export_extras=True)
     except:
         print("Exception: could not export scene as gltf")
     handler._set_response()
